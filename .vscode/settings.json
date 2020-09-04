@@ -3,6 +3,9 @@
         "chrono": "cpp",
         "random": "cpp",
         "limits": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "vector": "cpp",
+        "deque": "cpp",
+        "string": "cpp"
     }
 }
