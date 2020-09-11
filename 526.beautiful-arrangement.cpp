@@ -1,36 +1,28 @@
-/*
- * @lc app=leetcode id=526 lang=cpp
- *
- * [526] Beautiful Arrangement
- */
 
 // @lc code=start
 class Solution {
 public:
     int ans;
-    bool check(vector<int>v)
-    {
-        int c = 1;
-        for(auto x:v)
-        {
-            if((x%c!=0) and (c%x!=0)) return false;
-            c++;
-        }
-        return true;
-    }
     
-    void helper(int N,int pos,vector<int>&v)
+    
+    void helper(int N,vector<int>&v,vector<bool>&visited)
     {
-        if(pos==N+1 and check(v)){
+        if(v.size()==N){
             ans++;
             return;
         } 
-        for(int i=pos;i<=N;i++)
+        int pos = v.size()+1;//position the number to be inserted
+        for(int i=1;i<=N;i++)
         {
-            
-                v.push_back(i);
-                helper(N,pos+1,v);
-                v.pop_back();
+             if((!(i%pos) or !(pos%i))and !visited[i])
+             {
+                 visited[i]=1;
+                 v.push_back(i);
+                 helper(N,v,visited);
+                 v.pop_back();
+                 visited[i]=0;
+             }
+                
             
             
 
@@ -38,8 +30,9 @@ public:
     }
     int countArrangement(int N) {
         vector<int>v;
-        if(N==7) return 41;
-        helper(N,1,v);
+        vector<bool>visited(N+1);
+        // if(N==7) return 41;
+        helper(N,v,visited);
         return ans;
     }
 };
