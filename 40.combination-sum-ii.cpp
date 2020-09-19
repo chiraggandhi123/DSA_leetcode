@@ -7,21 +7,23 @@
 // @lc code=start
 class Solution {
 public:
-    vector<vector<int>>fans;
+    set<vector<int>>fans;
+    vector<vector<int>>uans;
     void fun(vector<int> &candidates,int target,vector<int>&ans,int x)
     {
         //base case
+        if(target<0) return;
         if(target==0)
         {
-            fans.push_back(ans);
+            fans.insert(ans);
             return;
         }
-        if(target<0) return;
+        
 
-        for(int i=x+1;i<candidates.size();i++)
+        for(int i=x;i<candidates.size();i++)
         {
             ans.push_back(candidates[i]);
-            fun(candidates,target - candidates[i],ans,i);            
+            fun(candidates,target - candidates[i],ans,i+1);            
             //backtrack
             ans.pop_back();
         }
@@ -30,8 +32,13 @@ public:
     vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
         // sort(candidates.begin(),candidates.end());
         vector<int>ans;
+        sort(candidates.begin(),candidates.end());
+        // 1,1,2,5,6,7,10
         fun(candidates,target,ans,0);
-        return fans;
+        for(auto x:fans){
+            uans.push_back(x);
+        }
+        return uans;
     }
 };
 // @lc code=end
