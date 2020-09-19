@@ -8,7 +8,7 @@
 class Solution {
 public:
     int maximalRectangle(vector<vector<char>>& matrix) {
-        //  we can use area of a rectangle in histogram approach for every column
+        //  we can use area of a rectangle in histogram approach for every column, yes we can do that
     }
 };
 // @lc code=end
